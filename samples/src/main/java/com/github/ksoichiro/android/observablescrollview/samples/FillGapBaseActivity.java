@@ -41,10 +41,10 @@ public abstract class FillGapBaseActivity<S extends Scrollable> extends BaseActi
     protected int mIntersectionHeight;
 
     private View mImageHolder;
-    private View mHeaderBackground;
-    private int mPrevScrollY;
-    private boolean mGapIsChanging;
-    private boolean mGapHidden;
+//    private View mHeaderBackground;
+//    private int mPrevScrollY;
+//    private boolean mGapIsChanging;
+//    private boolean mGapHidden;
     private boolean mReady;
 
     @Override
@@ -52,7 +52,7 @@ public abstract class FillGapBaseActivity<S extends Scrollable> extends BaseActi
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mActionBarSize = getActionBarSize();
@@ -64,7 +64,7 @@ public abstract class FillGapBaseActivity<S extends Scrollable> extends BaseActi
         mImageHolder = findViewById(R.id.image_holder);
         mHeader = findViewById(R.id.header);
         mHeaderBar = findViewById(R.id.header_bar);
-        mHeaderBackground = findViewById(R.id.header_background);
+//        mHeaderBackground = findViewById(R.id.header_background);
         mListBackgroundView = findViewById(R.id.list_background);
 
         final S scrollable = createScrollable();
@@ -119,18 +119,18 @@ public abstract class FillGapBaseActivity<S extends Scrollable> extends BaseActi
         ViewHelper.setTranslationY(mHeader, getHeaderTranslationY(scrollY));
 
         // Show/hide gap
-        final int headerHeight = mHeaderBar.getHeight();
-        boolean scrollUp = mPrevScrollY < scrollY;
-        if (scrollUp) {
-            if (mFlexibleSpaceImageHeight - headerHeight - mActionBarSize <= scrollY) {
-                changeHeaderBackgroundHeightAnimated(false, animated);
-            }
-        } else {
-            if (scrollY <= mFlexibleSpaceImageHeight - headerHeight - mActionBarSize) {
-                changeHeaderBackgroundHeightAnimated(true, animated);
-            }
-        }
-        mPrevScrollY = scrollY;
+//        final int headerHeight = mHeaderBar.getHeight();
+//        boolean scrollUp = mPrevScrollY < scrollY;
+//        if (scrollUp) {
+//            if (mFlexibleSpaceImageHeight - headerHeight - mActionBarSize <= scrollY) {
+//                changeHeaderBackgroundHeightAnimated(false, animated);
+//            }
+//        } else {
+//            if (scrollY <= mFlexibleSpaceImageHeight - headerHeight - mActionBarSize) {
+//                changeHeaderBackgroundHeightAnimated(true, animated);
+//            }
+//        }
+//        mPrevScrollY = scrollY;
     }
 
     protected float getHeaderTranslationY(int scrollY) {
@@ -142,53 +142,53 @@ public abstract class FillGapBaseActivity<S extends Scrollable> extends BaseActi
         return headerTranslationY;
     }
 
-    private void changeHeaderBackgroundHeightAnimated(boolean shouldShowGap, boolean animated) {
-        if (mGapIsChanging) {
-            return;
-        }
-        final int heightOnGapShown = mHeaderBar.getHeight();
-        final int heightOnGapHidden = mHeaderBar.getHeight() + mActionBarSize;
-        final float from = mHeaderBackground.getLayoutParams().height;
-        final float to;
-        if (shouldShowGap) {
-            if (!mGapHidden) {
-                // Already shown
-                return;
-            }
-            to = heightOnGapShown;
-        } else {
-            if (mGapHidden) {
-                // Already hidden
-                return;
-            }
-            to = heightOnGapHidden;
-        }
-        if (animated) {
-            ViewPropertyAnimator.animate(mHeaderBackground).cancel();
-            ValueAnimator a = ValueAnimator.ofFloat(from, to);
-            a.setDuration(100);
-            a.setInterpolator(new AccelerateDecelerateInterpolator());
-            a.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    float height = (float) animation.getAnimatedValue();
-                    changeHeaderBackgroundHeight(height, to, heightOnGapHidden);
-                }
-            });
-            a.start();
-        } else {
-            changeHeaderBackgroundHeight(to, to, heightOnGapHidden);
-        }
-    }
-
-    private void changeHeaderBackgroundHeight(float height, float to, float heightOnGapHidden) {
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mHeaderBackground.getLayoutParams();
-        lp.height = (int) height;
-        lp.topMargin = (int) (mHeaderBar.getHeight() - height);
-        mHeaderBackground.requestLayout();
-        mGapIsChanging = (height != to);
-        if (!mGapIsChanging) {
-            mGapHidden = (height == heightOnGapHidden);
-        }
-    }
+//    private void changeHeaderBackgroundHeightAnimated(boolean shouldShowGap, boolean animated) {
+//        if (mGapIsChanging) {
+//            return;
+//        }
+//        final int heightOnGapShown = mHeaderBar.getHeight();
+//        final int heightOnGapHidden = mHeaderBar.getHeight() + mActionBarSize;
+//        final float from = mHeaderBackground.getLayoutParams().height;
+//        final float to;
+//        if (shouldShowGap) {
+//            if (!mGapHidden) {
+//                // Already shown
+//                return;
+//            }
+//            to = heightOnGapShown;
+//        } else {
+//            if (mGapHidden) {
+//                // Already hidden
+//                return;
+//            }
+//            to = heightOnGapHidden;
+//        }
+//        if (animated) {
+//            ViewPropertyAnimator.animate(mHeaderBackground).cancel();
+//            ValueAnimator a = ValueAnimator.ofFloat(from, to);
+//            a.setDuration(100);
+//            a.setInterpolator(new AccelerateDecelerateInterpolator());
+//            a.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                @Override
+//                public void onAnimationUpdate(ValueAnimator animation) {
+//                    float height = (float) animation.getAnimatedValue();
+//                    changeHeaderBackgroundHeight(height, to, heightOnGapHidden);
+//                }
+//            });
+//            a.start();
+//        } else {
+//            changeHeaderBackgroundHeight(to, to, heightOnGapHidden);
+//        }
+//    }
+//
+//    private void changeHeaderBackgroundHeight(float height, float to, float heightOnGapHidden) {
+//        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mHeaderBackground.getLayoutParams();
+//        lp.height = (int) height;
+//        lp.topMargin = (int) (mHeaderBar.getHeight() - height);
+//        mHeaderBackground.requestLayout();
+//        mGapIsChanging = (height != to);
+//        if (!mGapIsChanging) {
+//            mGapHidden = (height == heightOnGapHidden);
+//        }
+//    }
 }

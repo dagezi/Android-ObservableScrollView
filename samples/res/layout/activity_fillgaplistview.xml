@@ -49,12 +49,12 @@
         android:layout_height="wrap_content"
         android:clipChildren="false">
 
-        <View
+        <!-- View
             android:id="@+id/header_background"
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_bar_height"
             android:background="?attr/colorPrimary"
-            android:minHeight="@dimen/header_bar_height" />
+            android:minHeight="@dimen/header_bar_height" / -->
 
         <LinearLayout
             android:id="@+id/header_bar"
@@ -72,16 +72,18 @@
                 android:maxLines="1"
                 android:paddingLeft="@dimen/margin_standard"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:background="?attr/colorPrimary"
+                />
         </LinearLayout>
     </FrameLayout>
 
-    <android.support.v7.widget.Toolbar
+    <!-- android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
-        app:theme="@style/Toolbar" />
+        app:theme="@style/Toolbar" / -->
 </FrameLayout>
